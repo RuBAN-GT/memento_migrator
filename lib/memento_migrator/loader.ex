@@ -8,12 +8,11 @@ defmodule MementoMigrator.Loader do
     (migrations_path() <> "/*.exs")
     |> Path.wildcard()
     |> Enum.map(&extract_migration/1)
-    |> Enum.filter(fn x -> x != nil end)
+    |> Enum.filter(&(&1 != nil))
   end
 
   defp migrations_path do
-    Mix.Project.config()[:app]
-    |> Application.app_dir("priv/memento/migrations")
+    project_path |> Path.join("priv/memento/migrations")
   end
 
   defp extract_migration(file_path) do
@@ -23,5 +22,10 @@ defmodule MementoMigrator.Loader do
       {module, _binary} -> module
       _ -> nil
     end
+  end
+
+  defp project_path do
+    app_name = Mix.Project.config()[:app]
+    Mix.Project.deps_paths()[app_name] || File.cwd!()
   end
 end
