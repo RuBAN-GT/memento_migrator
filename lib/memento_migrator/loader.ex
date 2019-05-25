@@ -12,11 +12,11 @@ defmodule MementoMigrator.Loader do
   end
 
   defp migrations_path do
-    project_path |> Path.join("priv/memento/migrations")
+    project_path() |> Path.join("priv/memento/migrations")
   end
 
   defp extract_migration(file_path) do
-    Code.require_file(file_path)
+    Code.load_file(file_path)
     |> List.first()
     |> case do
       {module, _binary} -> module
