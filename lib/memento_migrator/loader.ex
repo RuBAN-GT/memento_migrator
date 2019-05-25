@@ -25,7 +25,7 @@ defmodule MementoMigrator.Loader do
   end
 
   defp project_path do
-    app_name = Mix.Project.config()[:app]
-    Mix.Project.deps_paths()[app_name] || File.cwd!()
+    Mix.Project.config()[:app]
+    |> Application.app_dir()
   end
 end
