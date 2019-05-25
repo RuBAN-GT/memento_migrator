@@ -1,0 +1,15 @@
+# Internals
+/_build/
+/cover/
+/deps/
+/doc/
+/.fetch
+erl_crash.dump
+*.ez
+memento_migrator-*.tar
+.elixir_ls
+.mnesia
+
+# Another
+.idea
+.vscode
